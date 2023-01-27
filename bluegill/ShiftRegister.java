@@ -28,12 +28,14 @@ public class ShiftRegister<T> extends LinkedList<T> {
 	}
 	
 	public String toString () {
-		String serialized = "";
-		for (int i=0;i<this.size();i++) {
-			if (i>0) serialized += delim;
-			serialized += get(i).toString();
+		int stringLength = this.get(0).toString().length();
+		StringBuilder str = new StringBuilder( this.size()*stringLength + (this.size()-1)*delim.length() );
+		for (T item : this) {
+			str
+				.append(delim)
+				.append(item);
 		}
-		return serialized;
+		return str.toString().substring(delim.length()); // delete leading delim
 	}
 		
 	public static void main (String[] args) throws Exception {
